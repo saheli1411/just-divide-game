@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Just Divide — Kid Mode</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>➗</text></svg>">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Fixed design stage with automatic scaling to 1440x1024 -->
+  <div id="game-stage">
+    
+    <!-- Header -->
+    <header class="header">
+      <h1 class="game-title">JUST DIVIDE</h1>
+      <p class="subtitle">Match equal tiles or divide to clear numbers and beat your best score!</p>
+      <div class="session-timer" id="session-timer">⏱️ Time: 00:00</div>
+    </header>
+
+    <!-- Cat Mascot Area -->
+    <div class="mascot-section">
+      <!-- Left Badge: Level -->
+      <div class="badge-panel badge-left">
+        <span class="badge-title">LEVEL</span>
+        <span class="badge-value" id="level-display">1</span>
+      </div>
+
+      <!-- Center Cat Character -->
+      <div class="cat-wrapper" id="cat-mascot">
+        <!-- Built-in SVG Cat (Replaced by assets/cat.svg if supplied) -->
+        <svg viewBox="0 0 160 120" class="cat-svg">
+          <ellipse cx="80" cy="70" rx="50" ry="42" fill="#FFA94D" />
+          <polygon points="40,40 55,10 70,35" fill="#FFA94D" stroke="#E8590C" stroke-width="3" />
+          <polygon points="45,36 55,16 65,33" fill="#FFD8A8" />
+          <polygon points="90,35 105,10 120,40" fill="#FFA94D" stroke="#E8590C" stroke-width="3" />
+          <polygon points="95,33 105,16 115,36" fill="#FFD8A8" />
+          <circle cx="65" cy="62" r="6" fill="#212529" />
+          <circle cx="95" cy="62" r="6" fill="#212529" />
+          <circle cx="67" cy="60" r="2" fill="#FFF" />
+          <circle cx="97" cy="60" r="2" fill="#FFF" />
+          <polygon points="80,72 75,68 85,68" fill="#D9480F" />
+          <path d="M72 76 Q80 82 88 76" stroke="#212529" stroke-width="3" fill="none" stroke-linecap="round" />
+          <line x1="45" y1="68" x2="20" y2="65" stroke="#212529" stroke-width="2" />
+          <line x1="45" y1="74" x2="20" y2="76" stroke="#212529" stroke-width="2" />
+          <line x1="115" y1="68" x2="140" y2="65" stroke="#212529" stroke-width="2" />
+          <line x1="115" y1="74" x2="140" y2="76" stroke="#212529" stroke-width="2" />
+          <ellipse cx="38" cy="95" rx="14" ry="10" fill="#FFA94D" stroke="#E8590C" stroke-width="2" />
+          <ellipse cx="122" cy="95" rx="14" ry="10" fill="#FFA94D" stroke="#E8590C" stroke-width="2" />
+        </svg>
+      </div>
+
+      <!-- Right Badge: Score & Best -->
+      <div class="badge-panel badge-right">
+        <div class="score-sub"><span class="badge-title">SCORE</span> <span class="badge-value" id="score-display">0</span></div>
+        <div class="best-sub">BEST: <span id="best-display">0</span></div>
+      </div>
+    </div>
+
+    <!-- Main Gameplay Area -->
+    <main class="gameplay-area">
+      <!-- 4x4 Turquoise Grid -->
+      <div class="grid-container" id="grid">
+        <!-- 16 slots injected by JavaScript -->
+      </div>
+
+      <!-- Right-Side Action Panel -->
+      <aside class="action-panel">
+        
+        <!-- 1. KEEP Slot -->
+        <div class="action-box keep-card" id="keep-slot">
+          <div class="box-label">KEEP</div>
+          <div class="slot-holder" id="keep-holder"></div>
+        </div>
+
+        <!-- 2. Upcoming Tiles Stack -->
+        <div class="action-box queue-card">
+          <div class="box-label">UPCOMING</div>
+          <div class="queue-stack" id="queue-container"></div>
+        </div>
+
+        <!-- 3. TRASH Slot -->
+        <div class="action-box trash-card" id="trash-slot">
+          <div class="trash-icon">🗑️</div>
+          <div class="box-label">TRASH</div>
+          <div class="trash-counter">Uses: <span id="trash-count">3</span></div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Bottom Controls & Hints Toggle -->
+    <footer class="footer-controls">
+      <button class="ctrl-btn" id="btn-undo">⤺ Undo (Z)</button>
+      <button class="ctrl-btn" id="btn-hints">💡 Hints: <span id="hint-status">OFF</span> (G)</button>
+      <button class="ctrl-btn" id="btn-restart">🔄 Restart (R)</button>
+      <div class="difficulty-group">
+        <span>Level:</span>
+        <button class="diff-btn active" data-diff="1">Easy</button>
+        <button class="diff-btn" data-diff="2">Medium</button>
+        <button class="diff-btn" data-diff="3">Hard</button>
+      </div>
+    </footer>
+
+    <!-- Game Over Modal -->
+    <div class="modal-overlay hidden" id="game-over-modal">
+      <div class="modal-card">
+        <h2>🎉 GAME OVER 🎉</h2>
+        <p>No valid moves remaining!</p>
+        <div class="modal-stats">
+          <div>Final Score: <span id="modal-score">0</span></div>
+          <div>All-Time Best: <span id="modal-best">0</span></div>
+        </div>
+        <button class="play-again-btn" id="btn-play-again">Play Again</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
